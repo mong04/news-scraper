@@ -1,26 +1,31 @@
 <div class="row news-row">
     {{#if data}}
         {{#each data}}
-            <div class="col s12 m6">
-                <div id="card-block" class="card center news grey lighten-5">
-                    <div class="card-content">
-                        <span class="card-title">{{this.title}}</span>
-                        <p class="hide-on-small-only grey-text text-darken-4">{{this.description}}</p>
+            <div class="news col s12 m6">
+                <div class="card grey lighten-5 horizontal center-align hoverable">
+                    <div class="card-stacked">          
+                    <div class="card-content">              
+                        <p class="flow-text">{{this.title}}</p>
+                        <p class="hide-on-small-only">{{this.description}}</p> 
                     </div>
-                    <div class="row">
-                        <div class="col s6">
-                            <form action="/{{this._id}}?_method=DELETE" id="notes" method="POST">
-                                <button type="submit" class="grey darken-1 btn waves-light">Notes</button>
-                            </form>
+                    <div class="card-action">
+                        <div class="row">
+                            <div class="col s6">
+                                <form action="/{{this._id}}" id="notes" method="GET">
+                                    <button type="submit" class="grey darken-1 btn waves-light">Notes</button>
+                                </form>
+                            </div>
+                            <div class="col s6">
+                                <form action="/{{this._id}}?_method=PUT" id="delete" method="POST">
+                                    <button type="submit" class="grey darken-1 btn waves-light">Delete</button>
+                                </form>
+                            </div>
                         </div>
-                        <div class="col s6">
-                            <form action="/{{this._id}}?_method=PUT" id="delete" method="POST">
-                                <button type="submit" class="grey darken-1 btn waves-light">Delete</button>
-                            </form>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
+
         {{/each}}
         {{else}}
         <h2 class="grey-text text-darken-4">There's nothing to show yet...
