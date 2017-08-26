@@ -8,13 +8,10 @@ var ArticleSchema = new Schema({
     // img is a required string
     title: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     link: {
-        type: String,
-        required: true
-    },
-    img: {
         type: String,
         required: true
     },
@@ -25,6 +22,11 @@ var ArticleSchema = new Schema({
     note: {
         type: Schema.Types.ObjectId,
         ref: "Note"
+    },
+    saved: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 });
 

@@ -9,11 +9,13 @@
             <a class="btn btn-primary btn-lg" href="Jumbo action link" role="button">Jumbo action name</a>
         </p>
     </div>
+    {{> indexNews}}
 </div>
 
 <script type="text/javascript">
     window.onload = function() {
         document.getElementById('home').classList.add('active');
+        document.getElementById('notes').classList.add('hide');
+        document.getElementById('delete').classList.add('hide');
     }
 </script>
-
