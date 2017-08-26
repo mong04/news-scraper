@@ -11,10 +11,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
   <!-- Your custom styles -->
   <link rel="stylesheet" href="css/style.css">
-  <!-- Used as an example only to position the footer at the end of the page.
-  You can delete these styles or move it to your custom css file -->
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  {{!-- isotope CDN --}}
   <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
-  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
   <style>
     body {
       display: flex;
@@ -30,13 +30,20 @@
     
         {{{body}}}
 
-  <!-- jQuery CDN -->
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <!-- Materialize JS CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 
   <script type="text/javascript">
+  $(document).ready(function() {
+    var grid = $('.row').isotope({
+        // options... 
+        itemSelector: '.news',
+        masonry: {
+          horizontalOrder: true
+        }
+      });
     $(".button-collapse").sideNav();
+  });
   </script>
 
 </main>

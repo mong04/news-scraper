@@ -17,14 +17,13 @@ mongoose.Promise = Promise;
 // GET request to display initial page
 router.get('/', function(req, res) {
     // Grab all docs
-    Article.find({}, function(error, doc) {
+    Article.find({}).sort({date: -1}).exec(function(error, doc) {
         // Log errors
         if (error) {
             console.log(error);
         }
         // Render doc to browser
-        var data = {data:doc};
-        console.log(data);
+        var data = {data: doc};
         res.render("index", data);
     });
 });
@@ -36,12 +35,12 @@ router.put('/save/:id', function(req, res) {
         if (err) {
             console.log(err)
         }
-        // Loc doc
+        // Log doc
         else {
-            console.log(doc);
+            res.render("index", {success: true});
         }
-    })
-})
+    });
+});
 
 // GET request to scrape website
 router.get('/scrape', function(req, res) {
@@ -80,7 +79,9 @@ router.get('/scrape', function(req, res) {
     });
     // Tell browser we finished scraping
     res.sendStatus(200);
-})
+});
+
+// GET request to retrieve articles with a saved status
 router.get('/saved', function(req, res) {
     // Grab all saved docs
     Article.find({saved: true}, function(error, doc) {
@@ -89,14 +90,23 @@ router.get('/saved', function(req, res) {
             console.log(error);
         }
         // Render doc to browser
-        var data = {data:doc};
-        console.log(data);
+        var data = {data: doc};
         res.render("saved", data);
     });
 });
-router.delete('/:id', function(req, res) {
-    console.log(req.params.id);
-    res.render('saved');
+
+// PUT request to remove article from saved articles
+router.put('/:id', function(req, res) {
+    Article.update({_id: req.params.id}, {$set: {saved: false}}, function(err, doc) {
+        // Log errors
+        if (err) {
+            console.log(err)
+        }
+        // Loc doc
+        else {
+            res.redirect('saved');
+        }
+    });
 })
 
 module.exports = router;
