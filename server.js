@@ -37,7 +37,8 @@ app.use(methodOverride("_method"));
 app.use(express.static('public'));
 
 // Database config for mongoose
-mongoose.connect('mongodb://heroku_wws73gs9:u4iiclh3bvhh3nr58k3at525hq@ds161443.mlab.com:61443/heroku_wws73gs9', {
+var uri = "mongodb://heroku_wws73gs9:u4iiclh3bvhh3nr58k3at525hq@ds161443.mlab.com:61443/heroku_wws73gs9"
+mongoose.connect(uri, {
     useMongoClient: true
 });
 var db = mongoose.connection;
