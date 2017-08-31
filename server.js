@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({
 app.use(methodOverride("_method"));
 
 // Make public a static dir
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname,  './app/public')));
 
 // Database config for mongoose
 var uri = "mongodb://heroku_wws73gs9:u4iiclh3bvhh3nr58k3at525hq@ds161443.mlab.com:61443/heroku_wws73gs9"
@@ -57,7 +57,7 @@ var routes = require('./app/controllers/news-controller');
 app.use('/', routes);
 
 // Set port
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
 app.listen(port, function() {
     console.log(`App running on port ${port}`);

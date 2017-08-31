@@ -37,7 +37,7 @@ router.put('/save/:id', function(req, res) {
         }
         // Log doc
         else {
-            res.render("index", {success: true});
+            res.redirect(301, '/');
         }
     });
 });
@@ -68,17 +68,19 @@ router.get('/scrape', function(req, res) {
             entry.save(function(err, doc) {
                 // Log errors
                 if (err) {
-                    console.log(err);
+                    // console.log(err);
                 }
                 // Log doc
                 else {
-                    console.log(doc);
+                    // console.log(doc);
                 }
             });
         });
     });
     // Tell browser we finished scraping
-    res.sendStatus(200);
+    res.redirect('/').then(function(data) {
+        console.log(data);
+    })
 });
 
 // GET request to retrieve articles with a saved status
@@ -104,7 +106,7 @@ router.put('/:id', function(req, res) {
         }
         // Loc doc
         else {
-            res.redirect('saved');
+            res.redirect(301, '/saved');
         }
     });
 })
