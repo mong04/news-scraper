@@ -11,9 +11,20 @@
                     <div class="card-action">
                         <div class="row">
                             <div class="col s6">
-                                <form action="/save/{{this._id}}?_method=PUT" id="save" method="POST">
-                                    <button type="submit" class="grey darken-1 btn waves-light">Save</button>
-                                </form>
+                                <button type="button" 
+                                    id="save-button" 
+                                    class="{{#if this.saved}}
+                                        cyan darken-1
+                                    {{else}}
+                                        grey darken-1
+                                    {{/if}} btn waves-light" 
+                                    value="{{this._id}}">
+                                    {{#if this.saved}}
+                                        Saved
+                                    {{else}}
+                                        Save
+                                    {{/if}}
+                                </button>
                             </div>
                             <div class="col s6">
                                 <a href="{{this.link}}" target="_blank" class="grey darken-1 btn waves-light" href="{{this.link}}">Read</a>

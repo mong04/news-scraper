@@ -37,7 +37,7 @@ router.put('/save/:id', function(req, res) {
         }
         // Log doc
         else {
-            res.redirect(301, '/');
+            res.sendStatus(200);
         }
     });
 });
