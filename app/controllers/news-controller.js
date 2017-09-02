@@ -16,6 +16,7 @@ mongoose.Promise = Promise;
 
 // GET request to display initial page
 router.get('/', function(req, res) {
+    console.log("hello")
     // Grab all docs
     Article.find({}).sort({date: -1}).exec(function(error, doc) {
         // Log errors
@@ -44,7 +45,6 @@ router.put('/save/:id', function(req, res) {
 
 // GET request to scrape website
 router.get('/scrape', function(req, res) {
-    console.log("Scrape functionality: Being Built");
     // Request to grab body of the html
     request("https://techcrunch.com/", function(error, response, html) {
         // Load html into cheerio save it to $ for shorthand
@@ -78,9 +78,7 @@ router.get('/scrape', function(req, res) {
         });
     });
     // Tell browser we finished scraping
-    res.redirect('/').then(function(data) {
-        console.log(data);
-    })
+    res.sendStatus(200);
 });
 
 // GET request to retrieve articles with a saved status
@@ -97,6 +95,29 @@ router.get('/saved', function(req, res) {
     });
 });
 
+// POST request to create a new and add it to article
+router.post("/articles/:id", function(req, res) {
+    var newNote = new Note(req.body);
+    console.log(req.body);
+
+    newNote.save({"body": req.body}, function(error, doc) {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            Article.findOneAndUpdate({"_id": req.params.id}, {"notes": doc._id})
+            .exec(function(err, doc) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    res.send(doc);
+                }
+            })
+        }
+    })
+})
+
 // PUT request to remove article from saved articles
 router.put('/:id', function(req, res) {
     Article.update({_id: req.params.id}, {$set: {saved: false}}, function(err, doc) {
@@ -106,7 +127,7 @@ router.put('/:id', function(req, res) {
         }
         // Loc doc
         else {
-            res.redirect(301, '/saved');
+            res.redirect('/saved');
         }
     });
 })

@@ -4,6 +4,43 @@
 {{> savedNews}}
 </div>
 
+<div id="note-modal" class="modal">
+  <div class="modal-content">
+    <h4>Notes</h4>
+    <div class="row">
+        <div class="col s12">
+            <div class="card-panel white">
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col s11"><p id="note-text"></p></div>
+                        <div class="col s1"><a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">delete</i></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <form class="col s12" method="POST" action="/articles/59a9bb444cde2f14508c30b0">
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea id="textarea1" class="materialize-textarea"></textarea>
+                    <label for="textarea1">Create a new note</label>                    
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s4 offset-s8">
+                    <button type="submit" class="btn waves-effect waves-light cyan darken-1" id="note-save">Save
+                        <i class="material-icons right">send</i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>    
+  </div>
+  <div class="modal-footer">
+    <a class=" modal-action modal-close waves-effect waves-green btn-flat">Done</a>
+  </div>
+</div>
 
 <script type="text/javascript">
     window.onload = function() {

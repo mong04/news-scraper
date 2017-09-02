@@ -4,24 +4,24 @@
             <div class="news col s12 m6">
                 <div class="card grey lighten-5 horizontal center-align hoverable">
                     <div class="card-stacked">          
-                    <div class="card-content">              
-                        <p class="flow-text">{{this.title}}</p>
-                        <p class="hide-on-small-only">{{this.description}}</p> 
-                    </div>
-                    <div class="card-action">
-                        <div class="row">
-                            <div class="col s6">
-                                <form action="/{{this._id}}" id="notes" method="GET">
-                                    <button type="submit" class="grey darken-1 btn waves-light">Notes</button>
-                                </form>
+                        <a target="_blank" href="{{this.link}}">
+                            <div class="card-content">              
+                                    <p class="flow-text">{{this.title}}</p>
+                                    <p class="hide-on-small-only">{{this.description}}</p> 
                             </div>
-                            <div class="col s6">
-                                <form action="/{{this._id}}?_method=PUT" id="delete" method="POST">
-                                    <button type="submit" class="grey darken-1 btn waves-light">Delete</button>
-                                </form>
+                        </a>
+                        <div class="card-action">
+                            <div class="row">
+                                <div class="col s6">
+                                    <button type="submit" class="grey darken-1 btn waves-light" id="note-button" value="{{this._id}}">Notes</button>
+                                </div>
+                                <div class="col s6">
+                                    <form action="/{{this._id}}?_method=PUT" id="delete" method="POST">
+                                        <button type="submit" class="grey darken-1 btn waves-light">Delete</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
         {{/each}}
         {{else}}
         <h2 class="grey-text text-darken-4">There's nothing to show yet...
-            Do some scraping and try again!
+            Save some articles and come back!
         </h2>
     {{/if}}
 </div>
